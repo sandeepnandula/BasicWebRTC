@@ -4,6 +4,12 @@ function WebRTCHelper() {
     audio: false,
     video: true
   };
+ this.stream = null;
+ this.qvgaConstraints = { video: {width: {exact: 320}, height: {exact: 240}}};
+
+this.vgaConstraints = { video: {width: {exact: 640}, height: {exact: 480}}};
+
+this.hdConstraints = { video: {width: {exact: 1280}, height: {exact: 720}}};
 }
 
 WebRTCHelper.prototype.handleSuccess = function handleSuccess(stream) {
@@ -28,8 +34,28 @@ WebRTCHelper.prototype.getUserMedia = function getUserMedia() {
   .catch(this.handleError);
 }
 
+WebRTCHelper.prototype.addEventListener = function addEventListener() {
+  qVgaButton = document.querySelector('.qVga');
+  qVgaButton.addEventListener('click', () => this.changeVideoResolution(this.qvgaConstraints));
+  VgaButton = document.querySelector('.Vga');
+  VgaButton.addEventListener('click', () => this.changeVideoResolution(this.vgaConstraints));
+  hdButton = document.querySelector('.hd');
+  hdButton.addEventListener('click', () => this.changeVideoResolution(this.hdConstraints));
+}
+
+WebRTCHelper.prototype.changeVideoResolution = function changeVideoResolution(constraints) {
+  this.constraints = constraints;
+  if (stream) {
+    stream.getTracks().forEach(function(track) {
+      track.stop();
+  });
+}
+  this.getUserMedia();
+}
+
 const webRTCHelper = new WebRTCHelper();
 
 window.addEventListener('load', function load(event){
   webRTCHelper.getUserMedia();
+  webRTCHelper.addEventListener();
 }, false);
