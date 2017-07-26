@@ -1,0 +1,5 @@
+enum34==1.1.6
+GoogleAppEngineCloudStorageClient==1.9.22.1
+requests==2.10.0
+webapp2==2.5.2
+google-api-python-client==1.6.1
