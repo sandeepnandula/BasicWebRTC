@@ -17,6 +17,8 @@ class App extends Component {
           className='video'
           autoPlay
           ></video>
+        <button className='takepic'>Take a photo</button>
+        <canvas></canvas>
       </div>
     );
   }

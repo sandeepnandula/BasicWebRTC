@@ -41,6 +41,8 @@ WebRTCHelper.prototype.addEventListener = function addEventListener() {
   VgaButton.addEventListener('click', () => this.changeVideoResolution(this.vgaConstraints));
   hdButton = document.querySelector('.hd');
   hdButton.addEventListener('click', () => this.changeVideoResolution(this.hdConstraints));
+  takepicbutton = document.querySelector('.takepic');
+  takepicbutton.addEventListener('click', this.takesnapshot);
 }
 
 WebRTCHelper.prototype.changeVideoResolution = function changeVideoResolution(constraints) {
@@ -51,6 +53,15 @@ WebRTCHelper.prototype.changeVideoResolution = function changeVideoResolution(co
   });
 }
   this.getUserMedia();
+}
+
+WebRTCHelper.prototype.takesnapshot = function takesnapshot() {
+  let canvas = window.canvas = document.querySelector('canvas');
+  const video = document.querySelector('.video');
+  canvas.width = 480;
+  canvas.height = 360;
+  canvas.getContext('2d').
+  drawImage(video, 0, 0, canvas.width, canvas.height);
 }
 
 const webRTCHelper = new WebRTCHelper();
